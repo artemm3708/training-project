@@ -1,19 +1,14 @@
 package com.myproject.trainingproject.model;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.time.LocalDate;
 import java.util.Objects;
 
-@Data
-@AllArgsConstructor
-public class Employee {
-
-    private String email;
-    private String name;
-    private int age;
-    private LocalDate birthDay;
+public record Employee (String email,
+        String name,
+        Integer age,
+        LocalDate birthDay) {
 
     @Override
     public boolean equals(Object o) {
