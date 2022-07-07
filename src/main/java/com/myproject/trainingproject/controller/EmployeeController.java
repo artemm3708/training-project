@@ -1,6 +1,8 @@
 package com.myproject.trainingproject.controller;
 
+import com.myproject.trainingproject.model.Department;
 import com.myproject.trainingproject.model.Employee;
+import com.myproject.trainingproject.service.EmployeeService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,10 +16,10 @@ import java.util.List;
 public class EmployeeController {
 
     private static List<Employee> employees = new ArrayList<>();
+    private final EmployeeService employeeService;
 
-    private static List<Employee> addEmployee(Employee employee) {
-        employees.add(employee);
-        return employees;
+    public EmployeeController(EmployeeService employeeService) {
+        this.employeeService = employeeService;
     }
 
     @GetMapping("/employees")
@@ -26,9 +28,15 @@ public class EmployeeController {
         return "employees_page";
     }
 
-    @PostMapping("createEmployee")
+    @GetMapping("createEmployee")
     public String createEmployee(@ModelAttribute Employee employee) {
-        addEmployee(employee);
-        return "redirect:/employees";
+        employeeService.addEmployee(employee, employees);
+        return "createEmployee_page";
+    }
+
+    @PostMapping("/deleteDepartment")
+    public String deleteDepartment(@ModelAttribute Employee employee) {
+        employeeService.deleteEmployee(employee, employees);
+        return "redirect:/departments";
     }
 }

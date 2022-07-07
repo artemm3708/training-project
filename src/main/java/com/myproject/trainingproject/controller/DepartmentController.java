@@ -1,5 +1,6 @@
 package com.myproject.trainingproject.controller;
 
+import com.myproject.trainingproject.service.DepartmentService;
 import com.myproject.trainingproject.model.Department;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,6 +15,11 @@ import java.util.List;
 public class DepartmentController {
 
     private static List<Department> departments = new ArrayList<>();
+    private final DepartmentService departmentService;
+
+    public DepartmentController(DepartmentService departmentService) {
+        this.departmentService = departmentService;
+    }
 
     @GetMapping("/departments")
     public String departments(Model model) {
@@ -23,13 +29,13 @@ public class DepartmentController {
 
     @GetMapping("/createDepartment")
     public String createDepartment(@ModelAttribute Department department) {
-        DepartmentsUtils.addDepartment(department, departments);
+        departmentService.addDepartment(department, departments);
         return "createDepartment_page";
     }
 
     @PostMapping("/deleteDepartment")
     public String deleteDepartment(@ModelAttribute Department department) {
-        DepartmentsUtils.deleteDepartment(department, departments);
+        departmentService.deleteDepartment(department, departments);
         return "redirect:/departments";
     }
 }
