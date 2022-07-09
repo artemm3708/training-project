@@ -32,7 +32,7 @@ public class EmployeeRepository implements Repository<Employee> {
                  """;
         return jdbcTemplate.update(
                 sql,
-                employee.email(), employee.firstName(), employee.lastName(), employee.age(), employee.birthDay()
+                employee.getEmail(), employee.getFirstName(), employee.getLastName(), employee.getAge(), employee.getBirthDay()
         );
     }
 

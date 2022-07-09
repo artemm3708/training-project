@@ -33,7 +33,7 @@ public class DepartmentRepository implements Repository<Department> {
                  """;
         return jdbcTemplate.update(
                 sql,
-                department.name()
+                department.getName()
         );
     }
 

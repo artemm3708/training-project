@@ -11,6 +11,7 @@ public class DepartmentRowMapper implements RowMapper<Department> {
     @Override
     public Department mapRow(ResultSet resultSet, int i) throws SQLException {
         return new Department(
+                resultSet.getLong("id"),
                 resultSet.getString("name")
         );
     }
