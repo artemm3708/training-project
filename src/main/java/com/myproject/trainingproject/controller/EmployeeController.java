@@ -14,8 +14,6 @@ import java.util.List;
 
 @Controller
 public class EmployeeController {
-
-    private static List<Employee> employees = new ArrayList<>();
     private final EmployeeService employeeService;
 
     public EmployeeController(EmployeeService employeeService) {

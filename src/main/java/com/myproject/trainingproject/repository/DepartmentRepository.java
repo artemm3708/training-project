@@ -2,17 +2,16 @@ package com.myproject.trainingproject.repository;
 
 import com.myproject.trainingproject.model.Department;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
 
-@Repository
-public class DepartmentDAO implements DAO<Department> {
+@org.springframework.stereotype.Repository
+public class DepartmentRepository implements Repository<Department> {
 
     private final JdbcTemplate jdbcTemplate;
 
-    public DepartmentDAO(JdbcTemplate jdbcTemplate) {
+    public DepartmentRepository(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
 

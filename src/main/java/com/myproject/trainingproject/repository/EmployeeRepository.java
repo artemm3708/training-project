@@ -2,26 +2,24 @@ package com.myproject.trainingproject.repository;
 
 import com.myproject.trainingproject.model.Employee;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
 
-@Repository
-public class EmployeeDAO implements DAO<Employee> {
+@org.springframework.stereotype.Repository
+public class EmployeeRepository implements Repository<Employee> {
 
     private final JdbcTemplate jdbcTemplate;
 
-    public EmployeeDAO(JdbcTemplate jdbcTemplate) {
+    public EmployeeRepository(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
 
     @Override
     public List<Employee> select() {
         var sql = """
-                SELECT id, email, name, age, birthDay
+                SELECT id, email, first_name, last_name, age, "birthDay"
                 FROM employees
-                LIMIT 100;
                  """;
         return jdbcTemplate.query(sql, new EmployeeRowMapper());
     }
@@ -29,12 +27,12 @@ public class EmployeeDAO implements DAO<Employee> {
     @Override
     public int insert(Employee employee) {
         var sql = """
-                INSERT INTO employees(email, name, age, birthDay)
-                VALUES (?, ?, ?, ?);
+                INSERT INTO employees(email, first_name, last_name, age, "birthDay")
+                VALUES (?, ?, ?, ?, ?);
                  """;
         return jdbcTemplate.update(
                 sql,
-                employee.email(), employee.name(), employee.age(), employee.birthDay()
+                employee.email(), employee.firstName(), employee.lastName(), employee.age(), employee.birthDay()
         );
     }
 
@@ -50,7 +48,7 @@ public class EmployeeDAO implements DAO<Employee> {
     @Override
     public Optional<Employee> selectById(int id) {
         var sql = """
-                SELECT id, email, name, age, birthDay
+                SELECT id, email, first_name, last_name, age, "birthDay"
                 FROM employees
                 WHERE id = ?
                  """;

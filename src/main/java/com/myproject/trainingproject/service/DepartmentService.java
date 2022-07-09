@@ -1,7 +1,7 @@
 package com.myproject.trainingproject.service;
 
 import com.myproject.trainingproject.model.Department;
-import com.myproject.trainingproject.repository.DepartmentDAO;
+import com.myproject.trainingproject.repository.DepartmentRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -10,9 +10,9 @@ import java.util.NoSuchElementException;
 @Service
 public class DepartmentService {
 
-    private final DepartmentDAO departmentDAO;
+    private final DepartmentRepository departmentDAO;
 
-    public DepartmentService(DepartmentDAO departmentDAO) {
+    public DepartmentService(DepartmentRepository departmentDAO) {
         this.departmentDAO = departmentDAO;
     }
 

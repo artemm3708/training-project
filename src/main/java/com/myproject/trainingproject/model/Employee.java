@@ -5,10 +5,11 @@ import lombok.Data;
 import java.time.LocalDate;
 import java.util.Objects;
 
-public record Employee (String email,
-        String name,
-        Integer age,
-        LocalDate birthDay) {
+public record Employee(String email,
+                       String firstName,
+                       String lastName,
+                       Integer age,
+                       LocalDate birthDay) {
 
     @Override
     public boolean equals(Object o) {

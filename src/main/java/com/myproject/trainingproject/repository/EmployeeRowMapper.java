@@ -13,7 +13,8 @@ public class EmployeeRowMapper implements RowMapper<Employee> {
     public Employee mapRow(ResultSet resultSet, int i) throws SQLException {
         return new Employee(
                 resultSet.getString("email"),
-                resultSet.getString("name"),
+                resultSet.getString("first_name"),
+                resultSet.getString("last_name"),
                 resultSet.getInt("age"),
                 LocalDate.parse(resultSet.getString("birthDay"))
         );
