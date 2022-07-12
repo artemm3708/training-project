@@ -14,7 +14,6 @@ import java.util.List;
 @Controller
 public class DepartmentController {
 
-    private static List<Department> departments = new ArrayList<>();
     private final DepartmentService departmentService;
 
     public DepartmentController(DepartmentService departmentService) {
@@ -23,19 +22,18 @@ public class DepartmentController {
 
     @GetMapping("/departments")
     public String departments(Model model) {
-        model.addAttribute("departments", departments);
+        model.addAttribute("departments");
         return "departments_page";
     }
 
     @GetMapping("/createDepartment")
     public String createDepartment(@ModelAttribute Department department) {
-        departmentService.addDepartment(department, departments);
+        departmentService.addDepartment(department);
         return "createDepartment_page";
     }
 
     @PostMapping("/deleteDepartment")
-    public String deleteDepartment(@ModelAttribute Department department) {
-        departmentService.deleteDepartment(department, departments);
-        return "redirect:/departments";
+    public void deleteDepartment(@ModelAttribute Integer id) {
+        departmentService.deleteDepartment(id);
     }
 }
