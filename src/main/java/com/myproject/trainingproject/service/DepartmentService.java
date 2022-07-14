@@ -10,26 +10,26 @@ import java.util.NoSuchElementException;
 @Service
 public class DepartmentService {
 
-    private final DepartmentRepository departmentDAO;
+    private final DepartmentRepository departmentRepository;
 
-    public DepartmentService(DepartmentRepository departmentDAO) {
-        this.departmentDAO = departmentDAO;
+    public DepartmentService(DepartmentRepository departmentRepository) {
+        this.departmentRepository = departmentRepository;
     }
 
     public List<Department> getDepartments() {
-        return departmentDAO.select();
+        return departmentRepository.findAll();
     }
 
     public void addDepartment(Department department) {
-        departmentDAO.insert(department);
+        departmentRepository.save(department);
     }
 
-    public void deleteDepartment(int id) {
-        departmentDAO.delete(id);
+    public void deleteDepartment(Department department) {
+        departmentRepository.delete(department);
     }
 
-    public Department getDepartmentByID(int id) {
-        return departmentDAO.selectById(id)
+    public Department getDepartmentByID(Long id) {
+        return departmentRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException(String.format("Department with id %s not found", id)));
     }
 }

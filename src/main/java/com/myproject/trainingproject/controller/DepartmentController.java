@@ -2,38 +2,38 @@ package com.myproject.trainingproject.controller;
 
 import com.myproject.trainingproject.service.DepartmentService;
 import com.myproject.trainingproject.model.Department;
+import lombok.RequiredArgsConstructor;
+import lombok.experimental.FieldDefaults;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.List;
+
+import static lombok.AccessLevel.PRIVATE;
 
 @Controller
+@RequestMapping("/departments")
+@FieldDefaults(level = PRIVATE, makeFinal = true)
+@RequiredArgsConstructor
 public class DepartmentController {
 
-    private final DepartmentService departmentService;
+    DepartmentService departmentService;
 
-    public DepartmentController(DepartmentService departmentService) {
-        this.departmentService = departmentService;
-    }
-
-    @GetMapping("/departments")
+    @GetMapping()
     public String departments(Model model) {
-        model.addAttribute("departments");
-        return "departments_page";
+        model.addAttribute("departments", departmentService.getDepartments());
+        return "departments/departments_page";
     }
 
     @GetMapping("/createDepartment")
     public String createDepartment(@ModelAttribute Department department) {
         departmentService.addDepartment(department);
-        return "createDepartment_page";
+        return "departments/createDepartment_page";
     }
 
-    @PostMapping("/deleteDepartment")
-    public void deleteDepartment(@ModelAttribute Integer id) {
-        departmentService.deleteDepartment(id);
+    @DeleteMapping("/deleteDepartment")
+    public String deleteDepartment(@ModelAttribute Department department) {
+        departmentService.deleteDepartment(department);
+        return "redirect:/employees";
     }
 }

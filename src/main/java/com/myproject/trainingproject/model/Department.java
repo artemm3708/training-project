@@ -2,6 +2,7 @@ package com.myproject.trainingproject.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 
 import javax.persistence.*;
@@ -11,7 +12,7 @@ import java.util.Objects;
 @Table(name = "departments")
 @Data
 @AllArgsConstructor
-@RequiredArgsConstructor
+@NoArgsConstructor
 public class Department{
 
     @Id

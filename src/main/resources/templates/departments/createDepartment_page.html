@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Employees</title>
+    <title>Create Department</title>
     <style>
 table, th, td {
   border:1px solid black;
@@ -27,7 +27,7 @@ table, th, td {
         </form>
     </td>
     <td>
-        <form action="/createDepartment" method="post" th:object="${department}">
+        <form action="/createDepartment" method="post" th:object="${departments}">
             <input type="submit" value="Create department">
         </form>
     </td>

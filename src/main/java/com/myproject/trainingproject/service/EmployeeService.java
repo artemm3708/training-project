@@ -10,26 +10,26 @@ import java.util.NoSuchElementException;
 @Service
 public class EmployeeService {
 
-    private final EmployeeRepository employeeDAO;
+    private final EmployeeRepository employeeRepository;
 
-    public EmployeeService(EmployeeRepository employeeDAO) {
-        this.employeeDAO = employeeDAO;
+    public EmployeeService(EmployeeRepository employeeRepository) {
+        this.employeeRepository = employeeRepository;
     }
 
     public List<Employee> getEmployees() {
-        return employeeDAO.select();
+        return employeeRepository.findAll();
     }
 
     public void addEmployee(Employee employee) {
-        employeeDAO.insert(employee);
+        employeeRepository.save(employee);
     }
 
-    public void deleteEmployee(int id) {
-        employeeDAO.delete(id);
+    public void deleteEmployee(Employee employee) {
+        employeeRepository.delete(employee);
     }
 
-    public Employee getEmployeeByID(int id) {
-        return employeeDAO.selectById(id)
+    public Employee getEmployeeByID(Long id) {
+        return employeeRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException(String.format("Employee with id %s not found", id)));
     }
 
