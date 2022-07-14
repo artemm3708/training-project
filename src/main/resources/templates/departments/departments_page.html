@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Departments</title>
+    <style>
+table, th, td {
+  border:1px solid black;
+}
+</style>
+</head>
+<body>
+<table>
+    <tr>
+        <th>Department</th>
+    </tr>
+    <th:block th:each="department : ${departments}">
+        <tr>
+            <td th:text="${department.getName()}"></td>
+        </tr>
+    </th:block>
+</table>
+<form action="/departments/createDepartment" method="get" th:object="${departments}">
+    <button type="button">Create Department</button>
+</form>
+</body>
+</html>

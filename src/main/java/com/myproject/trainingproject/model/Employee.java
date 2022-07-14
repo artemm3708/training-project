@@ -2,17 +2,18 @@ package com.myproject.trainingproject.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.RequiredArgsConstructor;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.Period;
 import java.util.Objects;
 
 @Entity
 @Table(name = "employees")
 @Data
 @AllArgsConstructor
-@RequiredArgsConstructor
+@NoArgsConstructor
 public class Employee {
 
     @Id
@@ -24,10 +25,14 @@ public class Employee {
     private String firstName;
     @Column(name = "last_name")
     private String lastName;
-    @Column(name = "age")
+    @Transient
     private Integer age;
     @Column(name = "birthDay")
     private LocalDate birthDay;
+
+    public Integer getAge() {
+        return Period.between(this.birthDay, LocalDate.now()).getYears();
+    }
 
     @Override
     public boolean equals(Object o) {
